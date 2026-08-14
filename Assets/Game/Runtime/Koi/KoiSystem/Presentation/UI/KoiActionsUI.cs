@@ -16,6 +16,8 @@ namespace CreatureCare.KoiSystem.Presentation.UI
         [SerializeField] private TMP_Text playCooldownText;
         [SerializeField] private TMP_Text cleanPondCooldownText;
 
+        [SerializeField] private KoiActionFeedbackUI feedbackUI;
+
         [SerializeField] private KoiCareActions koiCareActions;
 
         private void Start()
@@ -39,17 +41,26 @@ namespace CreatureCare.KoiSystem.Presentation.UI
 
         private void HandleFeedClicked()
         {
-            koiCareActions.Feed();
+            if (koiCareActions.Feed())
+            {
+                feedbackUI.ShowFeedFeedback();
+            }
         }
 
         private void HandlePlayClicked()
         {
-            koiCareActions.Play();
+            if (koiCareActions.Play())
+            {
+                feedbackUI.ShowPlayFeedback();
+            }
         }
 
         private void HandleCleanPondClicked()
         {
-            koiCareActions.CleanPond();
+            if (koiCareActions.CleanPond())
+            {
+                feedbackUI.ShowCleanPondFeedback();
+            }
         }
 
         private void UpdateCooldownDisplay()
