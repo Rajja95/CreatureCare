@@ -1,6 +1,6 @@
 using System;
 
-namespace CreatureCare.Koi
+namespace CreatureCare.KoiSystem
 {
     public class KoiStateController
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CreatureCare.Koi.Actions
+namespace CreatureCare.KoiSystem.Actions
 {
     public class KoiCareActions : MonoBehaviour
     {

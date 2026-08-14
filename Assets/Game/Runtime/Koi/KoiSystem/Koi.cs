@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CreatureCare.Koi
+namespace CreatureCare.KoiSystem
 {
     public class Koi : MonoBehaviour
     {
@@ -24,7 +24,7 @@ namespace CreatureCare.Koi
         private void HandleStatsChanged()
         {
             StateController.Evaluate(Stats);
-            //Debug.Log($"Koi State: {StateController.CurrentState}");
+            Debug.Log($"Koi State: {StateController.CurrentState}");
         }
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CreatureCare.Koi
+namespace CreatureCare.KoiSystem
 {
     public class KoiNeedsDecay : MonoBehaviour
     {
