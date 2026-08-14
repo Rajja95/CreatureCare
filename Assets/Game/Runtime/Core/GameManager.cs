@@ -88,5 +88,10 @@ namespace CreatureCare.Core
 
             Debug.Log("The Koi has died. Game Over.");
         }
+
+        public void Quit()
+        {
+            Application.Quit();
+        }
     }
 }
