@@ -2,6 +2,7 @@ using CreatureCare.KoiSystem;
 using System.Collections;
 using UnityEngine;
 using CreatureCare.Audio;
+using TMPro;
 
 namespace CreatureCare.KoiSystem.Presentation
 {
@@ -21,6 +22,9 @@ namespace CreatureCare.KoiSystem.Presentation
 
         private Coroutine _popupCoroutine;
         private Vector3 _originalScale;
+
+        [SerializeField] private TMP_Text stateMessageText;
+        [SerializeField] private float messageDuration = 1.5f;
 
         private Koi _koi;
 
@@ -50,6 +54,8 @@ namespace CreatureCare.KoiSystem.Presentation
         {
             spriteRenderer.sprite = GetSpriteForState(state);
             AudioManager.Instance.PlayStateChange();
+
+            ShowStateMessage(state);
 
             if (_popupCoroutine != null)
             {
@@ -113,5 +119,33 @@ namespace CreatureCare.KoiSystem.Presentation
             transform.localScale = _originalScale;
             _popupCoroutine = null;
         }
+
+        private void ShowStateMessage(KoiState state)
+        {
+            stateMessageText.text = GetStateMessage(state);
+            stateMessageText.gameObject.SetActive(true);
+
+            CancelInvoke(nameof(HideStateMessage));
+            Invoke(nameof(HideStateMessage), messageDuration);
+        }
+
+        private void HideStateMessage()
+        {
+            stateMessageText.gameObject.SetActive(false);
+        }
+
+        private string GetStateMessage(KoiState state)
+        {
+            return state switch
+            {
+                KoiState.Happy => "I'm feeling great!",
+                KoiState.Normal => "I'm okay.",
+                KoiState.Unhappy => "I'm hungry...",
+                KoiState.Sick => "I don't feel well...",
+                KoiState.Dead => "...",
+                _ => string.Empty
+            };
+        }
     }
+
 }
