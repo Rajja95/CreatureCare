@@ -10,6 +10,10 @@ namespace CreatureCare.KoiSystem.Actions
         private KoiCareActionCooldown _playCooldown;
         private KoiCareActionCooldown _cleanPondCooldown;
 
+        public float FeedCooldownRemaining => _feedCooldown.RemainingTime;
+        public float PlayCooldownRemaining => _playCooldown.RemainingTime;
+        public float CleanPondCooldownRemaining => _cleanPondCooldown.RemainingTime;
+
         private void Awake()
         {
             _koi = GetComponent<Koi>();
