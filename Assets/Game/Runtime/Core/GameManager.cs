@@ -1,6 +1,7 @@
 using CreatureCare.KoiSystem;
 using CreatureCare.Systems;
 using UnityEngine;
+using CreatureCare.Core.Presentation;
 
 namespace CreatureCare.Core
 {
@@ -8,6 +9,8 @@ namespace CreatureCare.Core
     {
         [SerializeField] private KoiSystem.Koi _koi;
         [SerializeField] private DayCycle _dayCycle;
+
+        [SerializeField] private GameResultUI gameResultUI;
 
         public GameState CurrentState { get; private set; }
 
@@ -63,6 +66,8 @@ namespace CreatureCare.Core
             CurrentState = GameState.Won;
             _dayCycle.Stop();
 
+            gameResultUI.ShowWin();
+
             Debug.Log("Koi survived for 3 days! You win!");
         }
 
@@ -75,6 +80,8 @@ namespace CreatureCare.Core
 
             CurrentState = GameState.Lost;
             _dayCycle.Stop();
+
+            gameResultUI.ShowLose();
 
             Debug.Log("The Koi has died. Game Over.");
         }
