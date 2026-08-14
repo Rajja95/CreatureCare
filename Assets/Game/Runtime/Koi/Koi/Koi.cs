@@ -16,13 +16,6 @@ namespace CreatureCare.Koi
             Stats.StatsChanged += HandleStatsChanged;
         }
 
-        private void Start()
-        {
-            Debug.Log($"Hunger: {Stats.Hunger}");
-            Debug.Log($"Happiness: {Stats.Happiness}");
-            Debug.Log($"Water Quality: {Stats.WaterQuality}");
-        }
-
         private void OnDestroy()
         {
             Stats.StatsChanged -= HandleStatsChanged;
@@ -31,7 +24,7 @@ namespace CreatureCare.Koi
         private void HandleStatsChanged()
         {
             StateController.Evaluate(Stats);
-            Debug.Log($"Koi State: {StateController.CurrentState}");
+            //Debug.Log($"Koi State: {StateController.CurrentState}");
         }
     }
 }

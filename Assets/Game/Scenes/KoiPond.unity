@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 526402045}
   - component: {fileID: 526402044}
   - component: {fileID: 526402046}
+  - component: {fileID: 526402047}
   m_Layer: 0
   m_Name: Koi
   m_TagString: Untagged
@@ -300,6 +301,18 @@ MonoBehaviour:
   hungerDecayPerSecond: 0.5
   happinessDecayPerSecond: 0.25
   waterQualityDecayPerSecond: 0.2
+--- !u!114 &526402047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526402043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faaa7d3e641bd3a438363e51ba676a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0
