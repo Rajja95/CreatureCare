@@ -1,6 +1,7 @@
 using CreatureCare.KoiSystem;
 using System.Collections;
 using UnityEngine;
+using CreatureCare.Audio;
 
 namespace CreatureCare.KoiSystem.Presentation
 {
@@ -48,6 +49,7 @@ namespace CreatureCare.KoiSystem.Presentation
         private void HandleStateChanged(KoiState state)
         {
             spriteRenderer.sprite = GetSpriteForState(state);
+            AudioManager.Instance.PlayStateChange();
 
             if (_popupCoroutine != null)
             {

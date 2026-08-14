@@ -3,6 +3,7 @@ using CreatureCare.KoiSystem.Actions;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using CreatureCare.Audio;
 
 namespace CreatureCare.KoiSystem.Presentation.UI
 {
@@ -41,6 +42,8 @@ namespace CreatureCare.KoiSystem.Presentation.UI
 
         private void HandleFeedClicked()
         {
+            AudioManager.Instance.PlayButtonClick();
+
             if (koiCareActions.Feed())
             {
                 feedbackUI.ShowFeedFeedback();
@@ -49,6 +52,8 @@ namespace CreatureCare.KoiSystem.Presentation.UI
 
         private void HandlePlayClicked()
         {
+            AudioManager.Instance.PlayButtonClick();
+
             if (koiCareActions.Play())
             {
                 feedbackUI.ShowPlayFeedback();
@@ -57,6 +62,8 @@ namespace CreatureCare.KoiSystem.Presentation.UI
 
         private void HandleCleanPondClicked()
         {
+            AudioManager.Instance.PlayButtonClick();
+
             if (koiCareActions.CleanPond())
             {
                 feedbackUI.ShowCleanPondFeedback();

@@ -2,6 +2,7 @@ using CreatureCare.KoiSystem;
 using CreatureCare.Systems;
 using UnityEngine;
 using CreatureCare.Core.Presentation;
+using CreatureCare.Audio;
 
 namespace CreatureCare.Core
 {
@@ -63,6 +64,7 @@ namespace CreatureCare.Core
                 return;
             }
 
+            AudioManager.Instance.PlayWin();
             CurrentState = GameState.Won;
             _dayCycle.Stop();
 
@@ -78,6 +80,7 @@ namespace CreatureCare.Core
                 return;
             }
 
+            AudioManager.Instance.PlayLose();
             CurrentState = GameState.Lost;
             _dayCycle.Stop();
 
