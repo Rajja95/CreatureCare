@@ -1,4 +1,5 @@
 using CreatureCare.KoiSystem;
+using System.Collections;
 using UnityEngine;
 
 namespace CreatureCare.KoiSystem.Presentation
@@ -7,11 +8,26 @@ namespace CreatureCare.KoiSystem.Presentation
     {
         [SerializeField] private SpriteRenderer spriteRenderer;
 
+        [Header("State Sprites")]
+        [SerializeField] private Sprite happySprite;
+        [SerializeField] private Sprite normalSprite;
+        [SerializeField] private Sprite unhappySprite;
+        [SerializeField] private Sprite sickSprite;
+        [SerializeField] private Sprite deadSprite;
+
+        [SerializeField] private float statePopupScale = 1.2f;
+        [SerializeField] private float statePopupDuration = 0.2f;
+
+        private Coroutine _popupCoroutine;
+        private Vector3 _originalScale;
+
         private Koi _koi;
 
         private void Awake()
         {
             _koi = GetComponent<Koi>();
+
+            _originalScale = transform.localScale;
         }
 
         private void Start()
@@ -31,53 +47,69 @@ namespace CreatureCare.KoiSystem.Presentation
 
         private void HandleStateChanged(KoiState state)
         {
-            switch (state)
+            spriteRenderer.sprite = GetSpriteForState(state);
+
+            if (_popupCoroutine != null)
             {
-                case KoiState.Happy:
-                    SetHappyVisual();
-                    break;
-
-                case KoiState.Normal:
-                    SetNormalVisual();
-                    break;
-
-                case KoiState.Unhappy:
-                    SetUnhappyVisual();
-                    break;
-
-                case KoiState.Sick:
-                    SetSickVisual();
-                    break;
-
-                case KoiState.Dead:
-                    SetDeadVisual();
-                    break;
+                StopCoroutine(_popupCoroutine);
             }
+
+            _popupCoroutine = StartCoroutine(PlayStatePopup());
         }
 
-        private void SetHappyVisual()
+        private Sprite GetSpriteForState(KoiState state)
         {
-            spriteRenderer.color = Color.white;
+            return state switch
+            {
+                KoiState.Happy => happySprite,
+                KoiState.Normal => normalSprite,
+                KoiState.Unhappy => unhappySprite,
+                KoiState.Sick => sickSprite,
+                KoiState.Dead => deadSprite,
+                _ => normalSprite
+            };
         }
 
-        private void SetNormalVisual()
+        private IEnumerator PlayStatePopup()
         {
-            spriteRenderer.color = Color.white;
-        }
+            float halfDuration = statePopupDuration * 0.5f;
 
-        private void SetUnhappyVisual()
-        {
-            spriteRenderer.color = Color.gray;
-        }
+            Vector3 popupScale = _originalScale * statePopupScale;
 
-        private void SetSickVisual()
-        {
-            spriteRenderer.color = Color.yellow;
-        }
+            float elapsed = 0f;
 
-        private void SetDeadVisual()
-        {
-            spriteRenderer.color = Color.gray;
+            while (elapsed < halfDuration)
+            {
+                elapsed += Time.deltaTime;
+
+                float t = elapsed / halfDuration;
+
+                transform.localScale = Vector3.Lerp(
+                    _originalScale,
+                    popupScale,
+                    t);
+
+                yield return null;
+            }
+
+            elapsed = 0f;
+
+            while (elapsed < halfDuration)
+            {
+                elapsed += Time.deltaTime;
+
+                float t = elapsed / halfDuration;
+
+                transform.localScale = Vector3.Lerp(
+                    popupScale,
+                    _originalScale,
+                    t);
+
+                yield return null;
+            }
+
+            transform.localScale = _originalScale;
+            _popupCoroutine = null;
         }
     }
 }
