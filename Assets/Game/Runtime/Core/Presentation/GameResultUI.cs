@@ -1,5 +1,6 @@
 using CreatureCare.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CreatureCare.Core.Presentation
 {
@@ -25,6 +26,12 @@ namespace CreatureCare.Core.Presentation
         {
             actionsPanel.SetActive(false);
             losePanel.SetActive(true);
+        }
+
+        public void RestartGame()
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.buildIndex);
         }
     }
 }
